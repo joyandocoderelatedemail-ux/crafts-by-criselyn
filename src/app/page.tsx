@@ -5,6 +5,7 @@ import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { TrustHighlights } from '@/components/TrustHighlights';
 import { FeaturedBouquets } from '@/components/FeaturedBouquets';
+import { ThreeDGallerySection } from '@/components/ThreeDGallerySection';
 import { ImageShowcase } from '@/components/ImageShowcase';
 import { AboutSection } from '@/components/AboutSection';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
@@ -32,29 +33,32 @@ export default function Home() {
         {/* 3. Trust / Brand Highlights */}
         <TrustHighlights />
 
-        {/* 4. Featured Bouquets */}
+        {/* 4. Featured Bouquets Catalog */}
         <FeaturedBouquets onSelectBouquet={(b) => setSelectedBouquet(b)} />
 
-        {/* 5. Image Showcase (Instagram/Pinterest Style Lookbook) */}
+        {/* 5. 3D Stellar Orbit Gallery Animation */}
+        <ThreeDGallerySection />
+
+        {/* 6. Image Showcase (Instagram/Pinterest Style Lookbook) */}
         <ImageShowcase />
 
-        {/* 6. About Crafts by Criselyn */}
+        {/* 7. About Crafts by Criselyn */}
         <AboutSection />
 
-        {/* 7. Why Choose Crochet Bouquets? */}
+        {/* 8. Why Choose Crochet Bouquets? */}
         <WhyChooseUs />
 
-        {/* 8. Perfect for Every Occasion */}
+        {/* 9. Perfect for Every Occasion */}
         <OccasionsSection />
 
-        {/* 9. Order Section (CTA) */}
+        {/* 10. Order Section (CTA) */}
         <OrderSection />
 
-        {/* 10. Contact Section */}
+        {/* 11. Contact Section */}
         <ContactSection />
       </main>
 
-      {/* 11. Footer */}
+      {/* Footer */}
       <Footer />
 
       {/* Interactive Modal for Bouquet Details */}

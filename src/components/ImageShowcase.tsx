@@ -57,33 +57,31 @@ export const ImageShowcase: React.FC = () => {
         </div>
 
         {/* Pinterest / Masonry Layout Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {GALLERY_ITEMS.map((item, index) => (
             <div
               key={item.id}
               onClick={() => openLightbox(index)}
               className={`group relative rounded-3xl overflow-hidden shadow-soft hover:shadow-soft-lg cursor-pointer bg-blush-50 transition-all duration-300 transform hover:-translate-y-1 ${
-                index === 0
-                  ? 'md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto md:h-[500px]'
-                  : index === 3
-                  ? 'md:col-span-2 aspect-[16/9] md:h-[280px]'
-                  : 'aspect-[4/5] md:h-[280px]'
+                index === 0 || index === 5
+                  ? 'sm:col-span-2 aspect-[16/10] sm:h-[320px]'
+                  : 'aspect-[4/5] sm:h-[320px]'
               }`}
             >
               <Image
                 src={item.image}
                 alt={`${item.title} - ${item.subtitle}`}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/70 via-charcoal-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/80 via-charcoal-900/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Category Pill on top left */}
               <div className="absolute top-4 left-4 opacity-90 group-hover:opacity-100 transition-opacity">
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/90 text-charcoal-800 backdrop-blur-sm shadow-sm">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/95 text-charcoal-800 backdrop-blur-sm shadow-sm">
                   {item.category}
                 </span>
               </div>
@@ -94,14 +92,14 @@ export const ImageShowcase: React.FC = () => {
               </div>
 
               {/* Bottom Caption */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <h3 className="font-serif text-xl font-semibold leading-tight">
+              <div className="absolute bottom-0 left-0 right-0 p-5 text-white transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <h3 className="font-serif text-lg sm:text-xl font-semibold leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-blush-100 mt-1 line-clamp-2">
+                <p className="text-xs text-blush-100 mt-1 line-clamp-2">
                   {item.subtitle}
                 </p>
-                <div className="mt-3 flex items-center space-x-2 text-xs font-medium text-white/90">
+                <div className="mt-2.5 flex items-center space-x-2 text-xs font-medium text-white/90">
                   <span className="underline decoration-blush-400 underline-offset-4">Click to enlarge</span>
                 </div>
               </div>
@@ -148,7 +146,7 @@ export const ImageShowcase: React.FC = () => {
               type="button"
               onClick={nextImage}
               aria-label="Next image"
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-charcoal-900 flex items-center justify-center shadow-soft transition-all focus:outline-none md:hidden"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-charcoal-900 flex items-center justify-center shadow-soft transition-all focus:outline-none"
             >
               <ChevronRight className="w-6 h-6" />
             </button>

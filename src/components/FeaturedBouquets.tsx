@@ -10,11 +10,19 @@ interface FeaturedBouquetsProps {
 }
 
 export const FeaturedBouquets: React.FC<FeaturedBouquetsProps> = ({ onSelectBouquet }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'roses' | 'mixed'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'roses' | 'sunflowers' | 'specialty' | 'charms'>('all');
 
   const filteredBouquets = activeTab === 'all'
     ? BOUQUET_PRODUCTS
     : BOUQUET_PRODUCTS.filter((b) => b.category === activeTab);
+
+  const tabs: { id: 'all' | 'roses' | 'sunflowers' | 'specialty' | 'charms'; label: string }[] = [
+    { id: 'all', label: `All Creations (${BOUQUET_PRODUCTS.length})` },
+    { id: 'roses', label: 'Satin Roses' },
+    { id: 'sunflowers', label: 'Sunflowers & Daisies' },
+    { id: 'specialty', label: 'Graduation & Milestones' },
+    { id: 'charms', label: 'Favors & Charms' },
+  ];
 
   return (
     <section id="bouquets" className="py-20 lg:py-28 bg-white relative">
@@ -30,7 +38,7 @@ export const FeaturedBouquets: React.FC<FeaturedBouquetsProps> = ({ onSelectBouq
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blush-50 border border-blush-200 text-blush-700 text-xs font-medium tracking-wide uppercase mb-3">
             <Sparkles className="w-3.5 h-3.5 text-blush-500" />
             <span>Artisan Floral Collection</span>
@@ -43,52 +51,34 @@ export const FeaturedBouquets: React.FC<FeaturedBouquetsProps> = ({ onSelectBouq
           </p>
 
           {/* Category Filter Pills */}
-          <div className="mt-8 inline-flex items-center p-1.5 rounded-full bg-blush-50/80 border border-blush-100/80 shadow-soft-sm">
-            <button
-              type="button"
-              onClick={() => setActiveTab('all')}
-              className={`px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
-                activeTab === 'all'
-                  ? 'bg-white text-blush-700 shadow-sm'
-                  : 'text-gray-600 hover:text-charcoal-900'
-              }`}
-            >
-              All Bouquets ({BOUQUET_PRODUCTS.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('roses')}
-              className={`px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
-                activeTab === 'roses'
-                  ? 'bg-white text-blush-700 shadow-sm'
-                  : 'text-gray-600 hover:text-charcoal-900'
-              }`}
-            >
-              Rose Bouquets
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('mixed')}
-              className={`px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
-                activeTab === 'mixed'
-                  ? 'bg-white text-blush-700 shadow-sm'
-                  : 'text-gray-600 hover:text-charcoal-900'
-              }`}
-            >
-              Sunflowers & Plush
-            </button>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-3xl sm:rounded-full bg-blush-50/80 border border-blush-100/80 shadow-soft-sm max-w-3xl mx-auto">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? 'bg-white text-blush-700 shadow-sm border border-blush-200/60'
+                    : 'text-gray-600 hover:text-charcoal-900'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-7">
           {filteredBouquets.map((bouquet) => (
             <article
               key={bouquet.id}
               className="group bg-white rounded-3xl overflow-hidden border border-blush-100 shadow-soft hover:shadow-soft-lg transition-all duration-300 flex flex-col transform hover:-translate-y-1"
             >
               {/* Image Container with Zoom & Tag */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-blush-50/50 cursor-pointer"
+              <div
+                className="relative aspect-[4/5] w-full overflow-hidden bg-blush-50/50 cursor-pointer"
                 onClick={() => onSelectBouquet(bouquet)}
               >
                 <Image
@@ -96,7 +86,7 @@ export const FeaturedBouquets: React.FC<FeaturedBouquetsProps> = ({ onSelectBouq
                   alt={`${bouquet.name} - Handmade crochet bouquet by Crafts by Criselyn`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                  className="object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out"
                 />
 
                 {/* Gradient vignette */}
@@ -166,7 +156,7 @@ export const FeaturedBouquets: React.FC<FeaturedBouquetsProps> = ({ onSelectBouq
                       className="inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-medium text-gray-700 bg-blush-50 hover:bg-blush-100/70 border border-blush-200/60 transition-colors"
                     >
                       <Eye className="w-3.5 h-3.5 text-blush-500" />
-                      <span>View Details</span>
+                      <span>Details</span>
                     </button>
 
                     <a
